@@ -20,7 +20,7 @@ var tessel = require('tessel');
 var servoLib = require('tessel-servo');
 var servo = servolib.use(tessel);
 
-var servo1 = 1; // We have a servo plugged in on the first PWM pin (Port A, tx)
+var servo1 = 0; // We have a servo plugged in on the first PWM pin (Port A, tx)
 
 servo.on('ready', function () {
   var position = 0;  //  Target position of the servo between 0 (min) and 1 (max).
