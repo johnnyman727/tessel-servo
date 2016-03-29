@@ -1,13 +1,9 @@
 {
-  "name": "servo-pca9685",
-  "version": "0.1.3",
-  "description": "Library to run the PCA9685 PWM driver.",
+  "name": "tessel-servo",
+  "version": "0.0.3",
+  "description": "Library to use Tessel 2 PWM pins to drive servos.",
   "main": "index.js",
-  "scripts": {
-    "test": "tinytap -e 'tessel run {} ${SERVO_PORT}' test/*.js"
-  },
-  "repository": "tessel/servo-pca9685",
-  "author": "Jia Huang <jia@technical.io>",
+  "repository": "johnnyman727/tessel-servo",
   "license": "(MIT or Apache-2.0)",
   "directories": {
     "example": "examples"
@@ -23,6 +19,6 @@
   "keywords": [
     "tessel",
     "servo",
-    "pca9685"
+    "pwm"
   ]
 }
