@@ -1,11 +1,10 @@
-#Servo
-Driver for the servo-pca9685 Tessel servo module, capable of driving up to 16 servos at once. Can also be used to drive other devices which accept a 3.3 V PWM signal (most motor controllers, LEDs, gate drivers, etc.). The hardware documentation for this module can be found [here](https://github.com/tessel/hardware/blob/master/modules-overview.md#servo).
+#Tessel-Servo
+Module for driving servos off of Tessel 2 PWM pins
 
-If you run into any issues you can ask for support on the [Servo Module Forums](http://forums.tessel.io/category/servo).
 
 ###Installation
 ```sh
-npm install servo-pca9685
+npm install tessel-servo
 ```
 
 ###Example
@@ -18,11 +17,10 @@ to the console at each movement.
 *********************************************/
 
 var tessel = require('tessel');
-var servolib = require('servo-pca9685'); 
 
-var servo = servolib.use(tessel.port['A']);
+var servo = servolib.use(tessel);
 
-var servo1 = 1; // We have a servo plugged in at position 1
+var servo1 = 1; // We have a servo plugged in on the first PWM pin (Port A, tx)
 
 servo.on('ready', function () {
   var position = 0;  //  Target position of the servo between 0 (min) and 1 (max).
@@ -32,7 +30,7 @@ servo.on('ready', function () {
   //  and gets hot, try tuning these values (0.05 and 0.12).
   //  Moving them towards each other = less movement range
   //  Moving them apart = more range, more likely to stall and burn out
-  servo.configure(servo1, 0.05, 0.12, function () {
+  servo.configure(servo1, 0.03, 0.12, function () {
     setInterval(function () {
       console.log('Position (in range 0-1):', position);
       //  Set servo #1 to position pos.
@@ -53,11 +51,7 @@ servo.on('ready', function () {
 
 &#x20;<a href="#api-servo-move-whichServo-positionOrSpeed-callback-positionOrSpeed-is-a-value-between-0-and-1-On-a-normal-servo-this-value-is-the-position-to-move-to-as-a-percent-of-the-total-available-rotational-range-On-a-continuous-rotation-servo-this-value-represents-the-rotation-speed-0-is-fast-in-one-direction-1-is-fast-in-the-other-direction-and-0-5-is-stopped" name="api-servo-move-whichServo-positionOrSpeed-callback-positionOrSpeed-is-a-value-between-0-and-1-On-a-normal-servo-this-value-is-the-position-to-move-to-as-a-percent-of-the-total-available-rotational-range-On-a-continuous-rotation-servo-this-value-represents-the-rotation-speed-0-is-fast-in-one-direction-1-is-fast-in-the-other-direction-and-0-5-is-stopped">#</a> servo<b>.move</b>( whichServo, positionOrSpeed, callback(err) ) positionOrSpeed is a value between 0 and 1. On a normal servo, this value is the position to move to as a percent of the total available rotational range. On a continuous rotation servo, this value represents the rotation speed: 0 is fast in one direction, 1 is fast in the other direction, and 0.5 is stopped.  
 
-&#x20;<a href="#api-servo-read-whichServo-callback-Reads-the-current-approximate-position-target-for-the-specified-servo" name="api-servo-read-whichServo-callback-Reads-the-current-approximate-position-target-for-the-specified-servo">#</a> servo<b>.read</b>( whichServo, callback(err, reading) ) Reads the current approximate position target for the specified servo.  
-
 &#x20;<a href="#api-servo-setDutyCycle-whichServo-on-callback-Sets-the-duty-cycle-for-the-specified-servo-on-is-duty-cycle-uptime-range-from-0-1" name="api-servo-setDutyCycle-whichServo-on-callback-Sets-the-duty-cycle-for-the-specified-servo-on-is-duty-cycle-uptime-range-from-0-1">#</a> servo<b>.setDutyCycle</b>( whichServo, on, callback(err) ) Sets the duty cycle for the specified servo. on is duty cycle uptime, range from 0-1.  
-
-&#x20;<a href="#api-servo-setModuleFrequency-Hertz-callback-Sets-the-PWM-frequency-in-Hz-for-the-PCA9685-chip" name="api-servo-setModuleFrequency-Hertz-callback-Sets-the-PWM-frequency-in-Hz-for-the-PCA9685-chip">#</a> servo<b>.setModuleFrequency</b>( Hertz, callback(err) ) Sets the PWM frequency in Hz for the PCA9685 chip.  
 
 ###Events
 &#x20;<a href="#api-servo-on-error-callback-err-Emitted-upon-error" name="api-servo-on-error-callback-err-Emitted-upon-error">#</a> servo<b>.on</b>( 'error', callback(err) ) Emitted upon error.  
