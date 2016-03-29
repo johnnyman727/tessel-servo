@@ -59,13 +59,13 @@ servoController.prototype.configure = function (index, low, high, callback) {
       Callback
   */
   if (low >= high) {
-    var err = new Error('Minimum PWM must be smaller than maximum PWM.');
+    var err = new RangeError('Minimum PWM must be smaller than maximum PWM.');
     if (callback) {
       callback(err);
     }
     return err;
   }
-  
+
   this.servoConfigurations[index] = [low, high];
   if (callback) {
     callback(null);
@@ -99,7 +99,7 @@ servoController.prototype.getConfiguration = function (index, callback) {
     if (callback) {
       callback(new Error('Specified servo channel has not been configured'), null);
     }
-    return new Error('Specified servo channel has not been configured');
+    throw new Error('Specified servo channel has not been configured');
   } else {
     if (callback) {
       callback(null, this.servoConfigurations[index]);
@@ -120,15 +120,15 @@ servoController.prototype.move = function (index, val, callback) {
       Callback
   */
   if (index < 0 || index > 3) {
-    var err = new RangeError('Servos can be between 0-3.');
+    var err = new RangeError('Servo index can be between 0-3.');
     if (callback) {
       callback(err);
     }
     return err;
   }
-  
+
   if (val < 0 || val > 1) {
-    var err = new Error('Invalid position. Value must be between 0 and 1');
+    var err = new RangeError('Invalid position. Value must be between 0 and 1');
     if (callback) {
       callback(err);
     }
@@ -165,7 +165,7 @@ servoController.prototype.setDutyCycle = function (index, on, callback) {
     }
     return err;
   }
-  
+
   if (on < 0 || on > 1) {
     var err = new RangeError('Invalid duty cycle. Value must be between 0 and 1');
     if (callback) {
@@ -174,15 +174,13 @@ servoController.prototype.setDutyCycle = function (index, on, callback) {
     return err;
   }
 
-  var pwms = this.tessel.port.A.pwm.concat(this.tessel.port.B.pwm);
-  
-  pwms[index].pwmDutyCycle(on);
-  }  
+
+  this.pwms[index].pwmDutyCycle(on);
 };
 
 // Sets the PWM frequency in Hz for the PCA9685 chip
 servoController.prototype.setFrequency = function (freq, callback) {
-  this.tessel.pwmFrequency(freq, cb);
+  this.tessel.pwmFrequency(freq, callback);
 };
 
 function use (tessel, low, high, callback) {

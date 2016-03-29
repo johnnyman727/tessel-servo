@@ -1,6 +1,6 @@
 {
   "name": "tessel-servo",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "Library to use Tessel 2 PWM pins to drive servos.",
   "main": "index.js",
   "repository": "johnnyman727/tessel-servo",
