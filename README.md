@@ -58,11 +58,5 @@ servo.on('ready', function () {
 
 &#x20;<a href="#api-servo-on-ready-callback-Emitted-upon-first-successful-communication-between-the-Tessel-and-the-module" name="api-servo-on-ready-callback-Emitted-upon-first-successful-communication-between-the-Tessel-and-the-module">#</a> servo<b>.on</b>( 'ready', callback() ) Emitted upon first successful communication between the Tessel and the module.  
 
-###Hardware/Advanced usage
-*  The servos used in conjunction with this module should be powered through the 5.5 mm barrel jack.
-*  The physical *module* is marked with "S", "+", and "-". These correspond to signal, power, and GND. On most *servos*, the GND wire will be black/brown and the signal wire will be yellow/white. Red typically denotes 5 V power.
-*  This module can be used to drive most speed controllers, which in turn can control a wide variety of actuators. It can also be used to drive small LEDs with current limiting resistors in series.
-*  The bare square pads by the barrel jack allow the addition of a capacitor to the input power rail if desired. The pad closest to the board edge is connected to GND, the other to the barrel jack's positive pin. This addition is not required for proper module functionality.
-
 ###License
 MIT or Apache 2.0, at your option
